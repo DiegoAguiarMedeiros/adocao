@@ -14,8 +14,9 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import HomeScreen from '../screens/HomeScreen';
+import ChatScreen from '../screens/ChatScreen';
+import UserScreen from '../screens/UserScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -64,7 +65,7 @@ function BottomTabNavigator() {
       }}>
       <BottomTab.Screen
         name="Home"
-        component={TabOneScreen}
+        component={HomeScreen}
         options={({ navigation }: RootTabScreenProps<'Home'>) => ({
           title: 'Home',
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
@@ -86,7 +87,7 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="Chat"
-        component={TabTwoScreen}
+        component={ChatScreen}
         options={{
           title: 'Chat',
           tabBarIcon: ({ color }) => <TabBarIcon name="comments" color={color} />,
@@ -94,7 +95,7 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="Perfil"
-        component={TabTwoScreen}
+        component={UserScreen}
         options={{
           title: 'User',
           tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
