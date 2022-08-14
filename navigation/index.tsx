@@ -12,11 +12,11 @@ import { ColorSchemeName, Pressable } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import ModalScreen from '../src/screens/ModalScreen';
-import NotFoundScreen from '../src/screens/NotFoundScreen';
-import HomeScreen from '../src/screens/HomeScreen';
-import ChatScreen from '../src/screens/ChatScreen';
-import UserScreen from '../src/screens/UserScreen';
+import ModalScreen from '../screens/ModalScreen';
+import NotFoundScreen from '../screens/NotFoundScreen';
+import HomeScreen from '../screens/Home/HomeScreen';
+import ChatScreen from '../screens/Chat/ChatScreen';
+import UserScreen from '../screens/User/UserScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
