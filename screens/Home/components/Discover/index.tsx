@@ -4,9 +4,12 @@ import Colors from '../../../../constants/Colors';
 import Button from '../../../../components/Button';
 import { FontAwesome } from '@expo/vector-icons';
 import image from '../../../../assets/images/dogs/pug.jpg';
+import { DiscoverInformationArray } from '../../../../state/types/discover-state-types';
 
-export default function Discover() {
+export default function Discover({ data }: DiscoverInformationArray) {
   const colorScheme = useColorScheme();
+
+  console.log(data)
 
   return (
     <Styled.Container background={Colors[colorScheme].background}>
@@ -18,7 +21,7 @@ export default function Discover() {
         </Styled.breed>
       </Styled.ContainerProfile>
       <Styled.ContainerButtons background={Colors[colorScheme].background}>
-        <Styled.Buttons background={Colors[colorScheme].background}>
+        <Styled.Buttons>
           <Button
             style={{ marginRight: 16 }}
             size="xxmediumCircle"
@@ -34,8 +37,8 @@ export default function Discover() {
               style={{ marginRight: 15 }}
             />
           </Button>
-          </Styled.Buttons>
-          <Styled.Buttons background={Colors[colorScheme].background}>
+        </Styled.Buttons>
+        <Styled.Buttons>
           <Button
             style={{ marginRight: 16 }}
             size="xxmediumCircle"

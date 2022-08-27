@@ -15,6 +15,12 @@ export const Img = styled.Image`
   height: 60%;
   border-radius: 10px;
 `;
+export const ImgNoData = styled.Image`
+  width: 300px;
+  height: 300px;
+  margin: 200px auto 0;
+  border-radius: 10px;
+`;
 
 export const ContainerProfile = styled.View<{
   background: string,
