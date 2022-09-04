@@ -10,6 +10,22 @@ export const Container = styled.View<{
     padding:10px;
     `;
 
+export const containerImgLeft = styled.TouchableOpacity`
+margin:10px 0 0 10px;
+position:absolute;
+width:50%;
+height:59%;
+z-index:9999;
+`    
+export const containerImgRight = styled.TouchableOpacity`
+margin:10px 0 0 10px;
+left:50%;
+position:absolute;
+height:59%;
+width:50%;
+z-index:9999;
+`    
+
 export const Img = styled.Image`
   width: 100%;
   height: 60%;

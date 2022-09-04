@@ -4,8 +4,8 @@ import * as Styled from './styles';
 
 export type BtnProps = TouchableOpacityProps & {
   children: React.ReactNode;
-  color?: 'yellow' | 'blue' | 'white' | 'black';
-  colorShadow?: 'yellowShadow' | 'blueShadow' | 'whiteShadow' | 'blackShadow';
+  color?: string | 'yellow' | 'blue' | 'white' | 'black';
+  colorShadow?: string | 'yellowShadow' | 'blueShadow' | 'whiteShadow' | 'blackShadow';
   size?: 'larger' | 'medium' | 'xmedium' | 'xxmedium' | 'small' | 'largerCircle' | 'mediumCircle' | 'xmediumCircle' | 'xxmediumCircle' | 'smallCircle';
   textColor?: 'whiteText' | 'blackText' | 'blueText' | 'grayText';
   textSize?: 'mediumtxt';
