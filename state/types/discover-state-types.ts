@@ -4,8 +4,8 @@ export type DiscoverInformation = {
   raca: string,
   photos: Array<string>,
   rejects: boolean,
+  rejectPerfil: Function,
+  accepts: boolean,
+  acceptPerfil: Function,
 };
 
-export type DiscoverInformationArray = {
-  data: Array<DiscoverInformation>,
-};
