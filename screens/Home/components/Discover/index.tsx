@@ -17,7 +17,7 @@ export default function Discover({ data }: DiscoverInformationArray) {
       <Styled.ContainerProfile background={Colors[colorScheme].background} shadow={Colors[colorScheme].shadow}>
         <Styled.Name color={Colors[colorScheme].text}>Bolinha
         </Styled.Name>
-        <Styled.breed color={Colors[colorScheme].textSecondary}>Pug
+        <Styled.breed color={Colors[colorScheme].textSecondary}>Pug da cara inchada
         </Styled.breed>
       </Styled.ContainerProfile>
       <Styled.ContainerButtons background={Colors[colorScheme].background}>
@@ -26,7 +26,7 @@ export default function Discover({ data }: DiscoverInformationArray) {
             style={{ marginRight: 16 }}
             size="xxmediumCircle"
             colorShadow="blackShadow"
-            onPress={() => console.log('clicou')}
+            onPress={() => console.log('Não gostei...')}
             color="white"
           >
             {' '}
@@ -43,7 +43,7 @@ export default function Discover({ data }: DiscoverInformationArray) {
             style={{ marginRight: 16 }}
             size="xxmediumCircle"
             colorShadow="blackShadow"
-            onPress={() => console.log('clicou')}
+            onPress={() => console.log('Gostei!!!')}
             color="white"
           >
             {' '}
