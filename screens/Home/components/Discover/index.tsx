@@ -34,11 +34,7 @@ export default function Discover(props: DiscoverInformation) {
       <Styled.ContainerProfile background={Colors[colorScheme].background} shadow={Colors[colorScheme].shadow}>
         <Styled.Name color={Colors[colorScheme].text}>{props.name}
         </Styled.Name>
-<<<<<<< HEAD
-        <Styled.breed color={Colors[colorScheme].textSecondary}>Pug da cara inchada
-=======
         <Styled.breed color={Colors[colorScheme].textSecondary}>{props.raca}
->>>>>>> e6b36ac612d17b038d7fb0ad8374c6ed8f5f1d61
         </Styled.breed>
       </Styled.ContainerProfile>
       <Styled.ContainerButtons background={Colors[colorScheme].background}>
@@ -46,15 +42,9 @@ export default function Discover(props: DiscoverInformation) {
           <Button
             style={{ marginRight: 16 }}
             size="xxmediumCircle"
-<<<<<<< HEAD
-            colorShadow="blackShadow"
-            onPress={() => console.log('Não gostei...')}
-            color="white"
-=======
             colorShadow={Colors[colorScheme].buttonShadow}
             onPress={() => props.rejectPerfil()}
             color={Colors[colorScheme].buttonColor}
->>>>>>> e6b36ac612d17b038d7fb0ad8374c6ed8f5f1d61
           >
             {' '}
             <FontAwesome
@@ -69,15 +59,9 @@ export default function Discover(props: DiscoverInformation) {
           <Button
             style={{ marginRight: 16 }}
             size="xxmediumCircle"
-<<<<<<< HEAD
-            colorShadow="blackShadow"
-            onPress={() => console.log('Gostei!!!')}
-            color="white"
-=======
             colorShadow={Colors[colorScheme].buttonShadow}
             onPress={() => props.acceptPerfil()}
             color={Colors[colorScheme].buttonColor}
->>>>>>> e6b36ac612d17b038d7fb0ad8374c6ed8f5f1d61
           >
             {' '}
             <FontAwesome
