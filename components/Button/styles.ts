@@ -29,7 +29,6 @@ const modifiersButton = {
     shadow-color: #FFFF00;
     shadow-offset: {width: 1, height: 2};
     shadow-opacity: 0.8;
-    shadow-radius: 2;
     elevation: 3; 
   `,
 
@@ -37,7 +36,6 @@ const modifiersButton = {
     shadow-color: #4169E1;
     shadow-offset: {width: 1, height: 2};
     shadow-opacity: 0.8;
-    shadow-radius: 2;
     elevation: 3; 
   `,
 
@@ -45,7 +43,6 @@ const modifiersButton = {
     shadow-color: #ffffff;
     shadow-offset: {width: 1, height: 2};
     shadow-opacity: 0.8;
-    shadow-radius: 2;
     elevation: 3; 
   `,
 
@@ -53,7 +50,6 @@ const modifiersButton = {
     shadow-color: #000000;
     shadow-offset: {width: 1, height: 2};
     shadow-opacity: 0.8;
-    shadow-radius: 2;
     elevation: 3; 
   `,
 
@@ -74,6 +70,10 @@ const modifiersButton = {
     color: #333333;
   `,
 
+  //Size Buttons
+  login: () => css`
+    height: ${RFPercentage(5)}px;
+  `,
   //Size Buttons
   larger: () => css`
     width: ${RFPercentage(24.1)}px;
@@ -138,7 +138,7 @@ export const Button = styled.TouchableOpacity<Props>`
   ${({color, size, colorShadow}) => css`
     justify-content: center;
     align-items: center;
-    border-radius: 15x;
+    border-radius: 15;
     ${!!color && modifiersButton[color]}
     ${!!size && modifiersButton[size]}
     ${!!colorShadow && modifiersButton[colorShadow]}

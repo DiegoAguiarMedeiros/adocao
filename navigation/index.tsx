@@ -14,9 +14,10 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import HomeScreen from '../screens/Home/HomeScreen';
-import ChatScreen from '../screens/Chat/ChatScreen';
-import UserScreen from '../screens/User/UserScreen';
+import LoginScreen from '../screens/Login';
+import HomeScreen from '../screens/Home';
+import ChatScreen from '../screens/Chat';
+import UserScreen from '../screens/User';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -25,7 +26,8 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
     <NavigationContainer
       linking={LinkingConfiguration}
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <RootNavigator />
+      <LoginScreen />
+      {/* <RootNavigator /> */}
     </NavigationContainer>
   );
 }
@@ -58,6 +60,7 @@ function BottomTabNavigator() {
   const colorScheme = useColorScheme();
 
   return (
+    
     <BottomTab.Navigator
       initialRouteName="Home"
       screenOptions={{

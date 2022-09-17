@@ -23,12 +23,10 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'Home'>)
   const rejectPerfil = () => {
     discoverData[0].rejects = true;
     removerdataDogs();
-    console.log(dataDogs);
   }
   const acceptPerfil = () => {
     discoverData[0].accepts = true;
     removerdataDogs();
-    console.log(dataDogs);
   }
 
   const renderDiscover = () => {

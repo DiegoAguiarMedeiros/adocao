@@ -6,8 +6,8 @@ export type BtnProps = TouchableOpacityProps & {
   children: React.ReactNode;
   color?: string | 'yellow' | 'blue' | 'white' | 'black';
   colorShadow?: string | 'yellowShadow' | 'blueShadow' | 'whiteShadow' | 'blackShadow';
-  size?: 'larger' | 'medium' | 'xmedium' | 'xxmedium' | 'small' | 'largerCircle' | 'mediumCircle' | 'xmediumCircle' | 'xxmediumCircle' | 'smallCircle';
-  textColor?: 'whiteText' | 'blackText' | 'blueText' | 'grayText';
+  size?: 'login' | 'larger' | 'medium' | 'xmedium' | 'xxmedium' | 'small' | 'largerCircle' | 'mediumCircle' | 'xmediumCircle' | 'xxmediumCircle' | 'smallCircle';
+  textColor?: string | 'whiteText' | 'blackText' | 'blueText' | 'grayText';
   textSize?: 'mediumtxt';
   circle?: true | false;
   active?: boolean;
