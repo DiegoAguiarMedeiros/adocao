@@ -14,6 +14,7 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
+import RegisterScreen from '../screens/Register';
 import LoginScreen from '../screens/Login';
 import HomeScreen from '../screens/Home';
 import ChatScreen from '../screens/Chat';
@@ -26,8 +27,7 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
     <NavigationContainer
       linking={LinkingConfiguration}
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <LoginScreen />
-      {/* <RootNavigator /> */}
+      <RootNavigator />
     </NavigationContainer>
   );
 }
@@ -41,6 +41,8 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator>
+      <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
@@ -49,6 +51,7 @@ function RootNavigator() {
     </Stack.Navigator>
   );
 }
+
 
 /**
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
@@ -60,7 +63,7 @@ function BottomTabNavigator() {
   const colorScheme = useColorScheme();
 
   return (
-    
+
     <BottomTab.Navigator
       initialRouteName="Home"
       screenOptions={{

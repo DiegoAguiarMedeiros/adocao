@@ -7,7 +7,7 @@ import loginImg from '../../assets/images/login.png';
 
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../../types';
 
-export default function Login() {
+export default function Login({ navigation }) {
   const colorScheme = useColorScheme();
   return (
     <Styled.Container background={Colors[colorScheme].backgroundLogin}>
@@ -29,11 +29,11 @@ export default function Login() {
       </Styled.Buttons>
 
       <Styled.txTenhoConta>
-        Não possui conta? 
+        Não possui conta?
       </Styled.txTenhoConta>
-      <Styled.LinkAqui onPress={console.log('clicou')}>
+      <Styled.LinkAqui onPress={() => navigation.navigate('Register')}>
         <Styled.txCadastreSe>
-        Cadastre-se
+          Cadastre-se
         </Styled.txCadastreSe>
       </Styled.LinkAqui>
       <Styled.ImgLogin source={loginImg} />
