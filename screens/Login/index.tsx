@@ -4,10 +4,9 @@ import Colors from '../../constants/Colors';
 import Button from '../../components/Button';
 import { FontAwesome } from '@expo/vector-icons';
 import loginImg from '../../assets/images/login.png';
+import { RootStackParamList } from '../../types';
 
-import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../../types';
-
-export default function Login({ navigation }) {
+export default function Login({ navigation }: any) {
   const colorScheme = useColorScheme();
   return (
     <Styled.Container background={Colors[colorScheme].backgroundLogin}>
@@ -18,7 +17,7 @@ export default function Login({ navigation }) {
           textColor={Colors[colorScheme].buttonColorText}
           style={{ marginRight: 16 }}
           colorShadow={Colors[colorScheme].buttonShadow}
-          onPress={() => { console.log('a') }}
+          onPress={() => { navigation.navigate('Root') }}
           color={Colors[colorScheme].buttonColor}
           textSize="mediumtxt"
           size='login'
