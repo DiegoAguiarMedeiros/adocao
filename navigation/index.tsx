@@ -14,6 +14,7 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
+import RegisterComplementScreen from '../screens/RegisterComplement';
 import RegisterScreen from '../screens/Register';
 import LoginScreen from '../screens/Login';
 import HomeScreen from '../screens/Home';
@@ -43,6 +44,7 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Register" component={RegisterScreen} options={{ title: 'Cadastro Adocão' }} />
+      <Stack.Screen name="RegisterComplement" component={RegisterScreen} options={{ title: 'Completar Cadastro Adocão' }} />
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
