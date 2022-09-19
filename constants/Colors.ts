@@ -15,6 +15,10 @@ export default {
     shadow: '#000',
     buttonColorText: 'blackText',
     buttonColor: 'white',
+    buttonOptionColor: 'white',
+    buttonOptionColorActive: 'blue',
+    buttonOptionColorText: 'blackText',
+    buttonOptionColorTextActive: 'whiteText',
     buttonShadow: 'blackShadow',
   },
   dark: {
@@ -30,6 +34,10 @@ export default {
     shadow: '#eee',
     buttonColorText: 'whiteText',
     buttonColor: 'black',
+    buttonOptionColor: 'black',
+    buttonOptionColorActive: 'blue',
+    buttonOptionColorText: 'whiteText',
+    buttonOptionColorTextActive: 'whiteText',
     buttonShadow: 'whiteShadow',
   },
 };
