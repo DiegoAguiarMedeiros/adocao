@@ -12,7 +12,7 @@ export default function RegisterComplement({ navigation }: any) {
     {
       key: 1,
       title: "Você mora em:",
-      options: ['Aasa', 'Apê'],
+      options: ['Casa', 'Apê'],
       active: null,
     },
     {
