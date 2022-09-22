@@ -5,6 +5,7 @@ import Button from '../../components/Button';
 import { FontAwesome } from '@expo/vector-icons';
 import loginImg from '../../assets/images/login.png';
 import { RootStackParamList } from '../../types';
+import { TouchableOpacity, Text } from 'react-native';
 
 export default function Login({ navigation }: any) {
   const colorScheme = useColorScheme();
@@ -30,10 +31,14 @@ export default function Login({ navigation }: any) {
       <Styled.txTenhoConta>
         Não possui conta?
       </Styled.txTenhoConta>
-      <Styled.LinkAqui onPress={() => navigation.navigate('Register')}>
-        <Styled.txCadastreSe>
-          Cadastre-se
-        </Styled.txCadastreSe>
+      <Styled.LinkAqui>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Register')}
+        >
+          <Text>
+            Cadastre-se
+          </Text>
+        </TouchableOpacity>
       </Styled.LinkAqui>
       <Styled.ImgLogin source={loginImg} />
     </Styled.Container>
