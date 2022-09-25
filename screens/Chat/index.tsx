@@ -8,7 +8,7 @@ export default function ChatScreen() {
     <View style={styles.container}>
       <View style={styles.areaMensagens}>
         <ScrollView>
-          <Text style={styles.mensagemOutroUsuario}>Aqui irão aparecer as mensagens de outros usuarios para você...</Text>
+          <Text style={styles.mensagemOutroUsuario}>Aqui irão aparecer as mensagens de outros usuários para você...</Text>
           <Text style={styles.suaMensagem}>Entendi!</Text>
         </ScrollView>
       </View>
