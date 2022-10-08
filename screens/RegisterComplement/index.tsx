@@ -13,25 +13,25 @@ export default function RegisterComplement({ navigation }: any) {
       key: 1,
       title: "Você mora em:",
       options: ['Casa', 'Apê'],
-      active: null,
+      active: 'Casa',
     },
     {
       key: 2,
       title: "Espaço disponível na residência:",
       options: ['Grande', 'Médio','Pequeno'],
-      active: null,
+      active: 'Médio',
     },
     {
       key: 3,
       title: "Tem outros pets:",
       options: ['Sim','Não'],
-      active: null,
+      active: 'Não',
     },
     {
       key: 4,
       title: "Quantas horas você passa em casa por dia",
       options: ['4 ou menos','4 a 8 horas','8 a 12 horas','12 ou mais'],
-      active: null,
+      active: '4 ou menos',
     },
   ]
 
