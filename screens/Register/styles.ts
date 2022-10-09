@@ -11,6 +11,8 @@ export const Container = styled.View<{
     padding: 120px 50px;
     `;
 
+
+
 export const input = styled.TextInput<{
   background: string,
   text: string,
