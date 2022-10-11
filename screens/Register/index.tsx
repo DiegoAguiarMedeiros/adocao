@@ -37,13 +37,13 @@ export default function Register({ navigation }: any) {
       if (send) {
         console.log('aqui2')
         setErrorSubmit("");
-        // const returnApi = await restUsers.postUsers({
-        //   name: data.name,
-        //   email: data.email,
-        //   password: data.password,
-        // });
-        
-        // console.log('returnApi',returnApi)
+        const returnApi = await restUsers.postUsers({
+          name: data.name,
+          email: data.email,
+          password: data.password,
+        });
+
+        console.log('returnApi',returnApi)
         setData({
           name: "",
           email: "",
@@ -51,11 +51,7 @@ export default function Register({ navigation }: any) {
           confirmpassword: "",
         });
 
-        Swal.fire(
-          "Registrado com sucesso",
-          "",
-          "success"
-        );
+        console.log('foi')
       } else {
 
         if (data.password !== data.confirmpassword) {
@@ -71,36 +67,38 @@ export default function Register({ navigation }: any) {
 
       }
     } catch (error: any) {
-      if (
-        error.response.data?.message ===
-        "CreateUserUseCase: email already exists."
-      ) {
-        setErrors({
-          ...errorss,
-          email: 'E-mail já existe',
-        });
-      } else if (
-        error.response.data?.message ===
-        "CreateUserUseCase: email is not valid."
-      ) {
-        setErrors({
-          ...errorss,
-          email: 'E-mail não é válido',
-        });
-      } else if (
-        error.response.data?.message ===
-        "CreateUserUseCase: user name is no valid."
-      ) {
-        setErrors({
-          ...errorss,
-          name: "Nome inválido",
-        });
-      } else if (
-        error.response.data?.message ===
-        "CreateUserUseCase: user email is not valid."
-      ) {
-        setErrors({ ...errorss, email: "Email inválido" });
-      }
+      console.log('error')
+      console.log(error)
+      // if (
+      //   error.response.data?.message ===
+      //   "CreateUserUseCase: email already exists."
+      // ) {
+      //   setErrors({
+      //     ...errorss,
+      //     email: 'E-mail já existe',
+      //   });
+      // } else if (
+      //   error.response.data?.message ===
+      //   "CreateUserUseCase: email is not valid."
+      // ) {
+      //   setErrors({
+      //     ...errorss,
+      //     email: 'E-mail não é válido',
+      //   });
+      // } else if (
+      //   error.response.data?.message ===
+      //   "CreateUserUseCase: user name is no valid."
+      // ) {
+      //   setErrors({
+      //     ...errorss,
+      //     name: "Nome inválido",
+      //   });
+      // } else if (
+      //   error.response.data?.message ===
+      //   "CreateUserUseCase: user email is not valid."
+      // ) {
+      //   setErrors({ ...errorss, email: "Email inválido" });
+      // }
     }
   }
 

@@ -12,7 +12,7 @@ const putUsers = (values) => {
 };
 
 const postUsers = (values) => {
-  return HttpClient.put(`users`, values);
+  return HttpClient.post("users", values);
 };
 
 const putUsersActive = (id, values) => {
