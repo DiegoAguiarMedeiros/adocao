@@ -2,6 +2,8 @@ import Storage from "./storage";
 
 const getUser = () => Storage.getUser();
 
+const getUserId = () => Storage.getUserId();
+
 const getAdmin = () => Storage.getAdmin();
 
 const getUserDomain = () => Storage.getDomain();
@@ -74,6 +76,9 @@ const setHighLightSubCat = (user) => {
 const setUserToken = (token) => {
   Storage.setToken(token);
 };
+const setUserId = (id) => {
+  Storage.setUserId(id);
+};
 
 const setIsFirstLogin = (user) => {
   const { isFirstLogin } = user;
@@ -88,12 +93,15 @@ const setUserData = (data) => {
   setIsFirstLogin(data.user);
 };
 
+
+
 const clearUserSession = () => {
   Storage.dropStorage();
 };
 
 export default {
   getUser,
+  getUserId,
   getAdmin,
   getUserDomain,
   getUserToken,
@@ -104,4 +112,5 @@ export default {
   clearUserSession,
   setUserData,
   setDomainAndUser,
+  setUserId
 };

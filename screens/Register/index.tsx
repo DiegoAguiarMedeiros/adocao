@@ -6,6 +6,7 @@ import Button from '../../components/Button';
 import restUsers from '../../api/user/rest-user';
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
+import User from '../../utils/user'
 import Swal from 'sweetalert2';
 
 
@@ -35,6 +36,15 @@ export default function Register({ navigation }: any) {
     try {
       console.log('aqui', send)
       if (send) {
+
+        if (data.password !== data.confirmpassword) {
+          setErrors({
+            ...errorss,
+            password: 'As senha precisam ser iguais',
+            confirmpassword: 'As senha precisam ser iguais',
+          });
+        }
+
         console.log('aqui2')
         setErrorSubmit("");
         const returnApi = await restUsers.postUsers({
@@ -43,7 +53,11 @@ export default function Register({ navigation }: any) {
           password: data.password,
         });
 
-        console.log('returnApi',returnApi)
+
+        const userId = returnApi.data._id;
+
+        User.setUserId(userId)
+
         setData({
           name: "",
           email: "",
@@ -51,7 +65,7 @@ export default function Register({ navigation }: any) {
           confirmpassword: "",
         });
 
-        console.log('foi')
+        navigation.navigate('RegisterComplement')
       } else {
 
         if (data.password !== data.confirmpassword) {
@@ -106,8 +120,7 @@ export default function Register({ navigation }: any) {
     if (
       data.name.length > 0 &&
       data.email.length > 0 &&
-      data.password.length &&
-      (data.password === data.confirmpassword)
+      data.password.length > 0 
     ) {
       setSend(true);
     } else {

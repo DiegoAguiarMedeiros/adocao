@@ -1,5 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+const getUserId = () => JSON.parse(AsyncStorage.getItem("UIDADOCAO"));
+
 const getUser = () => JSON.parse(AsyncStorage.getItem("UADOCAO"));
 
 const getAdmin = () => JSON.parse(AsyncStorage.getItem("ADMINADOCAO"));
@@ -37,6 +39,10 @@ const setToken = (value) => {
   AsyncStorage.setItem("TKADOCAO", value);
 };
 
+const setUserId = (value) => {
+  AsyncStorage.setItem("UIDADOCAO", value);
+};
+
 const setStatus = (value) => {
   AsyncStorage.setItem("SADOCAO", value);
 };
@@ -70,6 +76,7 @@ const dropStorage = () => {
 };
 
 export default {
+  getUserId,
   getUser,
   getAdmin,
   getDomain,
@@ -92,4 +99,5 @@ export default {
   setAnotherUser,
   dropAnotherUser,
   getAnotherUser,
+  setUserId
 };
