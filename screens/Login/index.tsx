@@ -10,15 +10,23 @@ import { useForm } from "react-hook-form";
 import { useState } from 'react';
 import User from '../../utils/user'
 import restAuth from '../../api/auth/rest-auth';
+import Loading from '../../components/loading'
 
 export default function Login({ navigation }: any) {
   const colorScheme = useColorScheme();
   const { register, handleSubmit } = useForm();
+  const [showLoading, setShowLoading] = useState(false);
   const [send, setSend] = useState(false);
   const [errorSubmit, setErrorSubmit] = useState("");
   const [data, setData] = useState({
     email: "",
     password: "",
+  });
+
+
+
+  const [errorss, setErrors] = useState({
+    erro: "",
   });
 
   const handleVerify = () => {
@@ -33,6 +41,11 @@ export default function Login({ navigation }: any) {
   };
 
   async function onSubmit() {
+    setShowLoading(true)
+    setErrors({
+      ...errorss,
+      erro: '',
+    });
     try {
       console.log('aqui', send)
       if (handleVerify()) {
@@ -50,7 +63,7 @@ export default function Login({ navigation }: any) {
           email: "",
           password: "",
         });
-
+        setShowLoading(false)
         navigation.navigate('RegisterComplement')
       } else {
 
@@ -58,43 +71,41 @@ export default function Login({ navigation }: any) {
 
       }
     } catch (error: any) {
+      setShowLoading(false)
       console.log('error')
-      console.log(error)
-      // if (
-      //   error.response.data?.message ===
-      //   "CreateUserUseCase: email already exists."
-      // ) {
-      //   setErrors({
-      //     ...errorss,
-      //     email: 'E-mail já existe',
-      //   });
-      // } else if (
-      //   error.response.data?.message ===
-      //   "CreateUserUseCase: email is not valid."
-      // ) {
-      //   setErrors({
-      //     ...errorss,
-      //     email: 'E-mail não é válido',
-      //   });
-      // } else if (
-      //   error.response.data?.message ===
-      //   "CreateUserUseCase: user name is no valid."
-      // ) {
-      //   setErrors({
-      //     ...errorss,
-      //     name: "Nome inválido",
-      //   });
-      // } else if (
-      //   error.response.data?.message ===
-      //   "CreateUserUseCase: user email is not valid."
-      // ) {
-      //   setErrors({ ...errorss, email: "Email inválido" });
-      // }
+      console.log(error.response.data?.message)
+      if (
+        error.response.data?.message ===
+        "AuthenticateUseCase: user not found."
+      ) {
+        setErrors({
+          ...errorss,
+          erro: 'Usuário ou senha inválidos',
+        });
+      } else if (
+        error.response.data?.message ===
+        "AuthenticateUseCase: invalid password."
+      ) {
+        setErrors({
+          ...errorss,
+          erro: 'Usuário ou senha inválidos',
+        });
+      }
     }
+  }
+
+  const showLoadingFunc = () => {
+    return (<Loading />)
   }
 
   return (
     <Styled.Container background={Colors[colorScheme].backgroundLogin}>
+
+      {showLoading && showLoadingFunc()}
+
+      <Styled.txError>
+        {errorss && errorss.erro}
+      </Styled.txError>
       <Styled.input
         onChangeText={(email) => setData({ ...data, email: email })}
         value={data.email}

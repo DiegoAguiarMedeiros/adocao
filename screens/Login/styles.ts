@@ -45,3 +45,8 @@ export const txTenhoConta = styled.Text`
     margin-top: 20px;
     font-size: 20px;
 `;
+export const txError = styled.Text`
+    color:#f00;
+    margin-top: 20px;
+    font-size: 20px;
+`;
