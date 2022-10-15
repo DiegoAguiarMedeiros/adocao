@@ -87,9 +87,6 @@ const setIsFirstLogin = (user) => {
 
 const setUserData = (data) => {
   setUserToken(data.token);
-  setDomainAndUser(data.user);
-  setHighlight(data.user);
-  setHighLightSubCat(data.user);
   setIsFirstLogin(data.user);
 };
 

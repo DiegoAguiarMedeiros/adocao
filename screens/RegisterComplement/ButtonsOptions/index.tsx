@@ -6,9 +6,9 @@ import { useEffect, useState } from 'react';
 
 
 
-export default function ButtonsOptions({ options }: any) {
+export default function ButtonsOptions({ options,optionState, setOptionState }: any) {
   const colorScheme = useColorScheme();
-  const [optionState, setOptionState] = useState(options);
+  
   const [count, setCount] = useState(0);
   const activeButton = (key: number, buttonOption: string) => {
     optionState[key - 1].active = buttonOption;
