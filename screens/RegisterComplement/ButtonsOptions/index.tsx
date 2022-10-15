@@ -12,7 +12,7 @@ export default function ButtonsOptions({ options,optionState, setOptionState }: 
   const [count, setCount] = useState(0);
   const activeButton = (key: number, buttonOption: string) => {
     optionState[key - 1].active = buttonOption;
-    console.log('optionState2', optionState)
+    setCount(count + 1)
     setOptionState(optionState);
   }
   useEffect(() => {
@@ -53,19 +53,7 @@ export default function ButtonsOptions({ options,optionState, setOptionState }: 
 
   return (
     <Styled.Container background={Colors[colorScheme].backgroundLogin}>
-
-      <Styled.TxTitle>You clicked {count} times</Styled.TxTitle>
-      <Button textColor={Colors[colorScheme].buttonOptionColorTextActive}
-        style={{ marginRight: 16 }}
-        colorShadow={Colors[colorScheme].buttonShadow}
-        onPress={() => setCount(count + 1)}
-        color={Colors[colorScheme].buttonOptionColorActive}
-        textSize="mediumtxt"
-        size='login'
-      >
-        Click me
-      </Button>
-      {renderOptions(optionState)}
+         {renderOptions(optionState)}
     </Styled.Container >
   );
 }
