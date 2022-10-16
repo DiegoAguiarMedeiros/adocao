@@ -72,7 +72,7 @@ export default function Login({ navigation }: any) {
         setShowLoading(false)
         navigation.navigate('RegisterComplement')
       } else {
-
+        setShowLoading(false)
         setErrorSubmit("Verificar os campos");
 
       }
@@ -132,21 +132,21 @@ export default function Login({ navigation }: any) {
         >
           Login
         </Button>
-
       </Styled.Buttons>
 
-      <Styled.txTenhoConta>
-        Não possui conta?
-      </Styled.txTenhoConta>
-      <Styled.LinkAqui>
-        <TouchableOpacity
+      <Styled.Buttons>
+        <Button
+          textColor={Colors[colorScheme].buttonOptionColorTextActive}
+          style={{ marginRight: 16 }}
+          colorShadow={Colors[colorScheme].buttonShadow}
           onPress={() => navigation.navigate('Register')}
+          color={Colors[colorScheme].buttonOptionColorActive}
+          textSize="mediumtxt"
+          size='login'
         >
-          <Text>
-            Cadastre-se
-          </Text>
-        </TouchableOpacity>
-      </Styled.LinkAqui>
+          Cadastre-se
+        </Button>
+      </Styled.Buttons>
       <Styled.ImgLogin source={loginImg} />
     </Styled.Container>
   );

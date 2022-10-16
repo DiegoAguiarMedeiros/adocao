@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import User from '../../utils/user'
 import Swal from 'sweetalert2';
-
+import Loading from '../../components/loading'
 
 
 
@@ -17,6 +17,7 @@ export default function Register({ navigation }: any) {
   const colorScheme = useColorScheme();
   const [send, setSend] = useState(false);
   const [errorSubmit, setErrorSubmit] = useState("");
+  const [showLoading, setShowLoading] = useState(false);
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -32,10 +33,16 @@ export default function Register({ navigation }: any) {
   });
 
   async function onSubmit() {
-    handleVerify();
+    setShowLoading(true)
+    setErrors({
+      ...errorss,
+      name: "",
+      email: "",
+      password: "",
+      confirmpassword: "",
+    });
     try {
-      console.log('aqui', send)
-      if (send) {
+      if (handleVerify()) {
 
         if (data.password !== data.confirmpassword) {
           setErrors({
@@ -50,10 +57,10 @@ export default function Register({ navigation }: any) {
         const returnApi = await restUsers.postUsers({
           name: data.name,
           email: data.email,
-          house:0,
-          houseSize:0,
-          otherPets:false,
-          timeInHouse:0,
+          house: 0,
+          houseSize: 0,
+          otherPets: false,
+          timeInHouse: 0,
           password: data.password,
         });
 
@@ -68,10 +75,10 @@ export default function Register({ navigation }: any) {
           password: "",
           confirmpassword: "",
         });
-
+        setShowLoading(false)
         navigation.navigate('RegisterComplement')
       } else {
-
+        setShowLoading(false)
         if (data.password !== data.confirmpassword) {
           setErrors({
             ...errorss,
@@ -85,38 +92,37 @@ export default function Register({ navigation }: any) {
 
       }
     } catch (error: any) {
-      console.log('error')
-      console.log(error)
-      // if (
-      //   error.response.data?.message ===
-      //   "CreateUserUseCase: email already exists."
-      // ) {
-      //   setErrors({
-      //     ...errorss,
-      //     email: 'E-mail já existe',
-      //   });
-      // } else if (
-      //   error.response.data?.message ===
-      //   "CreateUserUseCase: email is not valid."
-      // ) {
-      //   setErrors({
-      //     ...errorss,
-      //     email: 'E-mail não é válido',
-      //   });
-      // } else if (
-      //   error.response.data?.message ===
-      //   "CreateUserUseCase: user name is no valid."
-      // ) {
-      //   setErrors({
-      //     ...errorss,
-      //     name: "Nome inválido",
-      //   });
-      // } else if (
-      //   error.response.data?.message ===
-      //   "CreateUserUseCase: user email is not valid."
-      // ) {
-      //   setErrors({ ...errorss, email: "Email inválido" });
-      // }
+      setShowLoading(false)
+      if (
+        error.response.data?.message ===
+        "CreateUserUseCase: email already exists."
+      ) {
+        setErrors({
+          ...errorss,
+          email: 'E-mail já existe',
+        });
+      } else if (
+        error.response.data?.message ===
+        "CreateUserUseCase: email is not valid."
+      ) {
+        setErrors({
+          ...errorss,
+          email: 'E-mail não é válido',
+        });
+      } else if (
+        error.response.data?.message ===
+        "CreateUserUseCase: user name is no valid."
+      ) {
+        setErrors({
+          ...errorss,
+          name: "Nome inválido",
+        });
+      } else if (
+        error.response.data?.message ===
+        "CreateUserUseCase: user email is not valid."
+      ) {
+        setErrors({ ...errorss, email: "Email inválido" });
+      }
     }
   }
 
@@ -124,7 +130,7 @@ export default function Register({ navigation }: any) {
     if (
       data.name.length > 0 &&
       data.email.length > 0 &&
-      data.password.length > 0 
+      data.password.length > 0
     ) {
       return true;
     } else {
@@ -132,24 +138,40 @@ export default function Register({ navigation }: any) {
     }
   };
 
+  const showLoadingFunc = () => {
+    return (<Loading />)
+  }
 
   return (
     <Styled.Container background={Colors[colorScheme].backgroundLogin}>
-      <Styled.input         onChangeText={(name) => setData({ ...data, name: name })}
+      {showLoading && showLoadingFunc()}
+      <Styled.input onChangeText={(name) => setData({ ...data, name: name })}
         value={data.name}
         background={Colors[colorScheme].backgroundInput} text={Colors[colorScheme].text} placeholder="Nome" placeholderTextColor={Colors[colorScheme].text}></Styled.input>
-      <Styled.input         onChangeText={(email) => setData({ ...data, email: email })}
+      <Styled.txError>
+        {errorss && errorss.name}
+      </Styled.txError>
+      <Styled.input onChangeText={(email) => setData({ ...data, email: email })}
         value={data.email}
         background={Colors[colorScheme].backgroundInput} text={Colors[colorScheme].text} placeholder="E-mail" placeholderTextColor={Colors[colorScheme].text}></Styled.input>
+      <Styled.txError>
+        {errorss && errorss.email}
+      </Styled.txError>
       <Styled.input onChangeText={(password) => setData({ ...data, password: password })} value={data.password} background={Colors[colorScheme].backgroundInput} text={Colors[colorScheme].text} placeholder="Senha" placeholderTextColor={Colors[colorScheme].text} secureTextEntry={true}></Styled.input>
+      <Styled.txError>
+        {errorss && errorss.password}
+      </Styled.txError>
       <Styled.input onChangeText={(confirmpassword) => setData({ ...data, confirmpassword: confirmpassword })} value={data.confirmpassword} background={Colors[colorScheme].backgroundInput} text={Colors[colorScheme].text} placeholder="Confirmar Senha" placeholderTextColor={Colors[colorScheme].text} secureTextEntry={true}></Styled.input>
+      <Styled.txError>
+        {errorss && errorss.confirmpassword}
+      </Styled.txError>
       <Styled.Buttons>
         <Button
-          textColor={Colors[colorScheme].buttonColorText}
+          textColor={Colors[colorScheme].buttonOptionColorTextActive}
           style={{ marginRight: 16 }}
           colorShadow={Colors[colorScheme].buttonShadow}
           onPress={handleSubmit(onSubmit)}
-          color={Colors[colorScheme].buttonColor}
+          color={Colors[colorScheme].buttonOptionColorActive}
           textSize="mediumtxt"
           size='login'
         >

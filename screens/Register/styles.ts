@@ -28,5 +28,12 @@ export const input = styled.TextInput<{
     `;
 
 export const Buttons = styled.View`
+margin:10px 0 0 0;
   text-align: center;
+`;
+export const txError = styled.Text`
+
+
+    color:#f00;
+    font-size: 20px;
 `;
