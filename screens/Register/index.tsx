@@ -50,6 +50,10 @@ export default function Register({ navigation }: any) {
         const returnApi = await restUsers.postUsers({
           name: data.name,
           email: data.email,
+          house:0,
+          houseSize:0,
+          otherPets:false,
+          timeInHouse:0,
           password: data.password,
         });
 
@@ -122,26 +126,23 @@ export default function Register({ navigation }: any) {
       data.email.length > 0 &&
       data.password.length > 0 
     ) {
-      setSend(true);
+      return true;
     } else {
-      setSend(false);
+      return false;
     }
-    console.log(send)
   };
 
 
   return (
     <Styled.Container background={Colors[colorScheme].backgroundLogin}>
-      <Styled.input onBlur={handleVerify}
-        onChangeText={(name) => setData({ ...data, name: name })}
+      <Styled.input         onChangeText={(name) => setData({ ...data, name: name })}
         value={data.name}
         background={Colors[colorScheme].backgroundInput} text={Colors[colorScheme].text} placeholder="Nome" placeholderTextColor={Colors[colorScheme].text}></Styled.input>
-      <Styled.input onBlur={handleVerify}
-        onChangeText={(email) => setData({ ...data, email: email })}
+      <Styled.input         onChangeText={(email) => setData({ ...data, email: email })}
         value={data.email}
         background={Colors[colorScheme].backgroundInput} text={Colors[colorScheme].text} placeholder="E-mail" placeholderTextColor={Colors[colorScheme].text}></Styled.input>
-      <Styled.input onBlur={handleVerify} onChangeText={(password) => setData({ ...data, password: password })} value={data.password} background={Colors[colorScheme].backgroundInput} text={Colors[colorScheme].text} placeholder="Senha" placeholderTextColor={Colors[colorScheme].text} secureTextEntry={true}></Styled.input>
-      <Styled.input onBlur={handleVerify} onChangeText={(confirmpassword) => setData({ ...data, confirmpassword: confirmpassword })} value={data.confirmpassword} background={Colors[colorScheme].backgroundInput} text={Colors[colorScheme].text} placeholder="Confirmar Senha" placeholderTextColor={Colors[colorScheme].text} secureTextEntry={true}></Styled.input>
+      <Styled.input onChangeText={(password) => setData({ ...data, password: password })} value={data.password} background={Colors[colorScheme].backgroundInput} text={Colors[colorScheme].text} placeholder="Senha" placeholderTextColor={Colors[colorScheme].text} secureTextEntry={true}></Styled.input>
+      <Styled.input onChangeText={(confirmpassword) => setData({ ...data, confirmpassword: confirmpassword })} value={data.confirmpassword} background={Colors[colorScheme].backgroundInput} text={Colors[colorScheme].text} placeholder="Confirmar Senha" placeholderTextColor={Colors[colorScheme].text} secureTextEntry={true}></Styled.input>
       <Styled.Buttons>
         <Button
           textColor={Colors[colorScheme].buttonColorText}

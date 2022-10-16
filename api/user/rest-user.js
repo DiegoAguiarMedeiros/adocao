@@ -15,6 +15,9 @@ const postUsers = (values) => {
   return HttpClient.post("users", values);
 };
 
+const putUsersComplement = (id, values) => {
+  HttpClient.put(`usersComplement?userId=${id}`, { active: values });
+};
 const putUsersActive = (id, values) => {
   HttpClient.put(`users?userId=${id}`, { active: values });
 };
