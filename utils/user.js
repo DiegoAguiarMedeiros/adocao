@@ -20,45 +20,15 @@ const getIsFirstLogin = () => Storage.getIsFirstLogin();
 
 const setDomainAndUser = (user) => {
   const {
-    userFirstName,
-    userLastName,
-    companyEmail,
-    subDomain,
+    name,
+    email,
     active,
     admin,
-    CEP,
-    CNPJ,
-    addressComplement,
-    addressNumber,
-    city,
-    companyName,
-    fantasyName,
-    operation,
-    state,
-    stateRegister,
-    street,
-    userEmail,
-    userPhone,
   } = user;
-  Storage.setDomain(subDomain);
   Storage.setAdmin(admin);
   Storage.setUser({
-    CEP,
-    CNPJ,
-    addressComplement,
-    addressNumber,
-    city,
-    companyName,
-    fantasyName,
-    operation,
-    state,
-    stateRegister,
-    street,
-    userEmail,
-    userPhone,
-    userFirstName,
-    userLastName,
-    companyEmail,
+    name,
+    email,
   });
   Storage.setStatus(active);
 };

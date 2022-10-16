@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const getUserId = () => JSON.parse(AsyncStorage.getItem("UIDADOCAO"));
 
-const getUser = () => JSON.parse(AsyncStorage.getItem("UADOCAO"));
+const getUser = () => AsyncStorage.getItem("UADOCAO");
 
 const getAdmin = () => JSON.parse(AsyncStorage.getItem("ADMINADOCAO"));
 
@@ -14,7 +14,7 @@ const getHighlight = () => AsyncStorage.getItem("HIGHLIGHTADOCAO");
 
 const getHighLightSubCat = () => AsyncStorage.getItem("HIGHLIGHTMYTMSUB");
 
-const getStatus = () => JSON.parse(AsyncStorage.getItem("SADOCAO"));
+const getStatus = () => AsyncStorage.getItem("SADOCAO");
 
 const getIsFirstLogin = () => JSON.parse(AsyncStorage.getItem("IFLADOCAO"));
 

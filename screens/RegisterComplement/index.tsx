@@ -5,10 +5,17 @@ import Button from '../../components/Button';
 import { RootStackParamList } from '../../types';
 import ButtonsOptions from './ButtonsOptions'
 import { useEffect, useState } from 'react';
+import Auth from '../../utils/auth'
 
 export default function RegisterComplement({ navigation }: any) {
   const colorScheme = useColorScheme();
 
+  useEffect(() => {
+    if (Auth.isAuthenticated()) {
+      navigation.navigate('RegisterComplement')
+    }
+    // eslint-disable-next-line
+  }, []);
 
   const options = [
     {

@@ -7,8 +7,9 @@ import loginImg from '../../assets/images/login.png';
 import { RootStackParamList } from '../../types';
 import { TouchableOpacity, Text } from 'react-native';
 import { useForm } from "react-hook-form";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import User from '../../utils/user'
+import Auth from '../../utils/auth'
 import restAuth from '../../api/auth/rest-auth';
 import Loading from '../../components/loading'
 
@@ -24,7 +25,12 @@ export default function Login({ navigation }: any) {
   });
 
 
-
+  useEffect(() => {
+    if (Auth.isAuthenticated()) {
+      navigation.navigate('RegisterComplement')
+    }
+    // eslint-disable-next-line
+  }, []);
   const [errorss, setErrors] = useState({
     erro: "",
   });
@@ -57,7 +63,7 @@ export default function Login({ navigation }: any) {
           password: data.password,
         });
 
-        User.setUserData(returnApi.data)
+        User.setDomainAndUser(returnApi.data)
 
         setData({
           email: "",
