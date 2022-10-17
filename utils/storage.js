@@ -1,27 +1,36 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const getUserId = () => JSON.parse(AsyncStorage.getItem("UIDADOCAO"));
+const _retrieveData = async (key) => {
+  try {
+    const data = await AsyncStorage.getItem(key);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-const getUser = () => AsyncStorage.getItem("UADOCAO");
+const getUserId = () => _retrieveData("UIDADOCAO");
 
-const getAdmin = () => JSON.parse(AsyncStorage.getItem("ADMINADOCAO"));
+const getUser = () => _retrieveData("UADOCAO");
 
-const getDomain = () => AsyncStorage.getItem("DOMADOCAO");
+const getAdmin = () => _retrieveData("ADMINADOCAO");
 
-const getToken = () => AsyncStorage.getItem("TKADOCAO");
+const getDomain = () => _retrieveData("DOMADOCAO");
 
-const getHighlight = () => AsyncStorage.getItem("HIGHLIGHTADOCAO");
+const getToken = () => _retrieveData("TKADOCAO");
 
-const getHighLightSubCat = () => AsyncStorage.getItem("HIGHLIGHTMYTMSUB");
+const getHighlight = () => _retrieveData("HIGHLIGHTADOCAO");
 
-const getStatus = () => AsyncStorage.getItem("SADOCAO");
+const getHighLightSubCat = () => _retrieveData("HIGHLIGHTMYTMSUB");
 
-const getIsFirstLogin = () => JSON.parse(AsyncStorage.getItem("IFLADOCAO"));
+const getStatus = () => _retrieveData("SADOCAO");
 
-const getAnotherUser = () => AsyncStorage.getItem("ANTHUSERADOCAO");
+const getIsFirstLogin = () => _retrieveData("IFLADOCAO");
+
+const getAnotherUser = () => _retrieveData("ANTHUSERADOCAO");
 
 const getAlreadyOnboarding = () =>
-  JSON.parse(AsyncStorage.getItem("ALREADONBOARDADOCAO"));
+  JSON.parse(_retrieveData("ALREADONBOARDADOCAO"));
 
 const setDomain = (value) => {
   AsyncStorage.setItem("DOMADOCAO", value);
@@ -44,7 +53,7 @@ const setUserId = (value) => {
 };
 
 const setStatus = (value) => {
-  AsyncStorage.setItem("SADOCAO", value);
+  AsyncStorage.setItem("SADOCAO", JSON.stringify(value));
 };
 
 const setHightlight = (value) => {

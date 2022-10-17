@@ -1,11 +1,9 @@
 import User from './user';
 import Storage from './storage';
 
-const isAuthenticated = () => {
-  const user = User.getUser();
-  const status = User.getStatus();
-  console.log('user',user)
-  console.log('status',status)
+const isAuthenticated = async () => {
+  const user = await User.getUser();
+  const status = await User.getStatus();
   return user !== null && status === true;
 };
 

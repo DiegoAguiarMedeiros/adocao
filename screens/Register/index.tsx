@@ -52,18 +52,29 @@ export default function Register({ navigation }: any) {
           });
         }
 
-        console.log('aqui2')
+        console.log('a',{
+          name: data.name,
+          email: data.email,
+          house: '',
+          houseSize: '',
+          otherPets: false,
+          timeInHouse: '',
+          password: data.password,
+        })
+
         setErrorSubmit("");
         const returnApi = await restUsers.postUsers({
           name: data.name,
           email: data.email,
-          house: 0,
-          houseSize: 0,
+          house: '',
+          houseSize: '',
           otherPets: false,
-          timeInHouse: 0,
+          timeInHouse: '',
           password: data.password,
         });
+        console.log('b')
 
+        console.log('returnApi',returnApi)
 
         const userId = returnApi.data._id;
 
@@ -76,7 +87,7 @@ export default function Register({ navigation }: any) {
           confirmpassword: "",
         });
         setShowLoading(false)
-        navigation.navigate('RegisterComplement')
+        navigation.navigate('Login')
       } else {
         setShowLoading(false)
         if (data.password !== data.confirmpassword) {
@@ -92,6 +103,7 @@ export default function Register({ navigation }: any) {
 
       }
     } catch (error: any) {
+      console.log('error',error)
       setShowLoading(false)
       if (
         error.response.data?.message ===

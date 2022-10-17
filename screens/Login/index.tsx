@@ -25,11 +25,16 @@ export default function Login({ navigation }: any) {
   });
 
 
-  useEffect(() => {
-    if (Auth.isAuthenticated()) {
+  const isAuthenticated = async () => {
+    const authenticated = await Auth.isAuthenticated();
+    if (authenticated) {
       navigation.navigate('RegisterComplement')
     }
-    // eslint-disable-next-line
+  }
+
+
+  useEffect(() => {
+    isAuthenticated();
   }, []);
   const [errorss, setErrors] = useState({
     erro: "",
@@ -53,10 +58,10 @@ export default function Login({ navigation }: any) {
       erro: '',
     });
     try {
-      console.log('aqui', send)
+
       if (handleVerify()) {
 
-        console.log('aqui2')
+
         setErrorSubmit("");
         const returnApi = await restAuth.postAuth({
           email: data.email,
@@ -64,6 +69,7 @@ export default function Login({ navigation }: any) {
         });
 
         User.setDomainAndUser(returnApi.data)
+        User.setUserData(returnApi.data);
 
         setData({
           email: "",

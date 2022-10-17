@@ -16,7 +16,7 @@ const postUsers = (values) => {
 };
 
 const putUsersComplement = (id, values) => {
-  HttpClient.put(`usersComplement?userId=${id}`, { active: values });
+  return HttpClient.put(`usersComplement?userId=${id}`, values);
 };
 const putUsersActive = (id, values) => {
   HttpClient.put(`users?userId=${id}`, { active: values });
@@ -24,6 +24,7 @@ const putUsersActive = (id, values) => {
 
 export default {
   putRecoveryPassword,
+  putUsersComplement,
   putUsers,
   putUsersActive,
   getAllUser,

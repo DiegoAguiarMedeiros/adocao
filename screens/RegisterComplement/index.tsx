@@ -29,11 +29,16 @@ export default function RegisterComplement({ navigation }: any) {
     confirmpassword: "",
   });
 
-  useEffect(() => {
-    if (Auth.isAuthenticated()) {
+  const isAuthenticated = async () => {
+    const authenticated = await Auth.isAuthenticated();
+    if (authenticated) {
       navigation.navigate('RegisterComplement')
     }
-    // eslint-disable-next-line
+  }
+
+
+  useEffect(() => {
+    isAuthenticated();
   }, []);
 
   const options = [
@@ -66,31 +71,29 @@ export default function RegisterComplement({ navigation }: any) {
   const [optionState, setOptionState] = useState(options);
 
   async function onSubmit() {
-    handleVerify();
+
+
     try {
-      console.log('aqui', send)
-      if (send) {
+      if (handleVerify()) {
 
-        if (data.password !== data.confirmpassword) {
-          setErrors({
-            ...errorss,
-            password: 'As senha precisam ser iguais',
-            confirmpassword: 'As senha precisam ser iguais',
-          });
-        }
 
-        console.log('aqui2')
+
         setErrorSubmit("");
-        const returnApi = await restUsers.postUsers({
-          name: data.name,
-          email: data.email,
-          password: data.password,
+        const userId = await User.getUserId();
+        console.log('1',userId,{
+          house: optionState[0].active,
+          houseSize: optionState[1].active,
+          otherPets: optionState[2].active === 'Sim' ? true : false,
+          timeInHouse: optionState[3].active,
+        })
+        const returnApi = await restUsers.putUsersComplement(userId,{
+          house: optionState[0].active,
+          houseSize: optionState[1].active,
+          otherPets: optionState[2].active === 'Sim' ? true : false,
+          timeInHouse: optionState[3].active,
         });
+        console.log('2',returnApi)
 
-
-        const userId = returnApi.data._id;
-
-        User.setUserId(userId)
 
         setData({
           name: "",
@@ -98,8 +101,8 @@ export default function RegisterComplement({ navigation }: any) {
           password: "",
           confirmpassword: "",
         });
-
-        navigation.navigate('RegisterComplement')
+        console.log('3')
+        navigation.navigate('Root')
       } else {
 
         if (data.password !== data.confirmpassword) {
@@ -115,51 +118,20 @@ export default function RegisterComplement({ navigation }: any) {
 
       }
     } catch (error: any) {
-      console.log('error')
+      console.log('error asd')
       console.log(error)
-      // if (
-      //   error.response.data?.message ===
-      //   "CreateUserUseCase: email already exists."
-      // ) {
-      //   setErrors({
-      //     ...errorss,
-      //     email: 'E-mail já existe',
-      //   });
-      // } else if (
-      //   error.response.data?.message ===
-      //   "CreateUserUseCase: email is not valid."
-      // ) {
-      //   setErrors({
-      //     ...errorss,
-      //     email: 'E-mail não é válido',
-      //   });
-      // } else if (
-      //   error.response.data?.message ===
-      //   "CreateUserUseCase: user name is no valid."
-      // ) {
-      //   setErrors({
-      //     ...errorss,
-      //     name: "Nome inválido",
-      //   });
-      // } else if (
-      //   error.response.data?.message ===
-      //   "CreateUserUseCase: user email is not valid."
-      // ) {
-      //   setErrors({ ...errorss, email: "Email inválido" });
-      // }
+
     }
   }
 
   const handleVerify = () => {
-    if (
-      data.name.length > 0 &&
-      data.email.length > 0 &&
-      data.password.length > 0
-    ) {
+    const retorno = optionState.filter((item) => item.active !== '')
+    if (retorno.length === optionState.length) {
       return true;
     } else {
       return false;
     }
+
   };
 
   return (
@@ -184,7 +156,7 @@ export default function RegisterComplement({ navigation }: any) {
             textColor={Colors[colorScheme].buttonOptionColorTextActive}
             style={{ marginRight: 16 }}
             colorShadow={Colors[colorScheme].buttonShadow}
-            onPress={() => console.log('pular')}
+            onPress={handleSubmit(onSubmit)}
             color={Colors[colorScheme].buttonOptionColorActive}
             textSize="mediumtxt"
             size='login'

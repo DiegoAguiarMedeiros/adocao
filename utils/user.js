@@ -18,13 +18,16 @@ const getStatus = () => Storage.getStatus();
 
 const getIsFirstLogin = () => Storage.getIsFirstLogin();
 
-const setDomainAndUser = (user) => {
+const setDomainAndUser = ({user}) => {
+
   const {
+    _id,
     name,
     email,
     active,
     admin,
   } = user;
+  Storage.setUserId(_id);
   Storage.setAdmin(admin);
   Storage.setUser({
     name,
