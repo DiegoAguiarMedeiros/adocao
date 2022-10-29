@@ -11,6 +11,8 @@ const _retrieveData = async (key) => {
 
 const getUserId = () => _retrieveData("UIDADOCAO");
 
+const getUserRegisterCompleted = () => _retrieveData("UREGISTERCOMPLETEDADOCAO");
+
 const getUser = () => _retrieveData("UADOCAO");
 
 const getAdmin = () => _retrieveData("ADMINADOCAO");
@@ -48,6 +50,10 @@ const setToken = (value) => {
   AsyncStorage.setItem("TKADOCAO", value);
 };
 
+const setUserRegisterCompleted = (value) => {
+  AsyncStorage.setItem("UREGISTERCOMPLETEDADOCAO", JSON.stringify(value));
+};
+
 const setUserId = (value) => {
   AsyncStorage.setItem("UIDADOCAO", value);
 };
@@ -69,7 +75,7 @@ const setAlreadyOnBoarding = (value) => {
 };
 
 const setIsFirstLogin = (value) => {
-  AsyncStorage.setItem("IFLADOCAO", value);
+  AsyncStorage.setItem("IFLADOCAO", JSON.stringify(value));
 };
 
 const setAnotherUser = (value) => {
@@ -108,5 +114,7 @@ export default {
   setAnotherUser,
   dropAnotherUser,
   getAnotherUser,
-  setUserId
+  setUserId,
+  setUserRegisterCompleted,
+  getUserRegisterCompleted
 };

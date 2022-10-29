@@ -3,7 +3,7 @@ import Storage from './storage';
 
 const isAuthenticated = async () => {
   const user = await User.getUser();
-  const status = await User.getStatus();
+  const status = Boolean(await User.getStatus());
   return user !== null && status === true;
 };
 

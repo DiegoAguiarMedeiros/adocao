@@ -4,6 +4,8 @@ const getUser = () => Storage.getUser();
 
 const getUserId = () => Storage.getUserId();
 
+const getUserRegisterCompleted = () => Storage.getUserRegisterCompleted();
+
 const getAdmin = () => Storage.getAdmin();
 
 const getUserDomain = () => Storage.getDomain();
@@ -18,7 +20,7 @@ const getStatus = () => Storage.getStatus();
 
 const getIsFirstLogin = () => Storage.getIsFirstLogin();
 
-const setDomainAndUser = ({user}) => {
+const setDomainAndUser = ({ user }) => {
 
   const {
     _id,
@@ -26,7 +28,9 @@ const setDomainAndUser = ({user}) => {
     email,
     active,
     admin,
+    registerCompleted,
   } = user;
+  Storage.setUserRegisterCompleted(registerCompleted);
   Storage.setUserId(_id);
   Storage.setAdmin(admin);
   Storage.setUser({
@@ -82,5 +86,6 @@ export default {
   clearUserSession,
   setUserData,
   setDomainAndUser,
-  setUserId
+  setUserId,
+  getUserRegisterCompleted
 };

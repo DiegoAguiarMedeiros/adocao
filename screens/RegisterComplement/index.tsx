@@ -31,8 +31,16 @@ export default function RegisterComplement({ navigation }: any) {
 
   const isAuthenticated = async () => {
     const authenticated = await Auth.isAuthenticated();
+    console.log('authenticated', authenticated)
     if (authenticated) {
-      navigation.navigate('RegisterComplement')
+
+      const getUserRegisterCompleted = await User.getUserRegisterCompleted();
+      console.log('getUserRegisterCompleted', getUserRegisterCompleted)
+      if (getUserRegisterCompleted) {
+        navigation.navigate('Root')
+      } else {
+        navigation.navigate('RegisterComplement')
+      }
     }
   }
 
@@ -80,19 +88,19 @@ export default function RegisterComplement({ navigation }: any) {
 
         setErrorSubmit("");
         const userId = await User.getUserId();
-        console.log('1',userId,{
+        console.log('1', userId, {
           house: optionState[0].active,
           houseSize: optionState[1].active,
           otherPets: optionState[2].active === 'Sim' ? true : false,
           timeInHouse: optionState[3].active,
         })
-        const returnApi = await restUsers.putUsersComplement(userId,{
+        const returnApi = await restUsers.putUsersComplement(userId, {
           house: optionState[0].active,
           houseSize: optionState[1].active,
           otherPets: optionState[2].active === 'Sim' ? true : false,
           timeInHouse: optionState[3].active,
         });
-        console.log('2',returnApi)
+        console.log('2', returnApi)
 
 
         setData({
