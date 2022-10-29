@@ -72,9 +72,6 @@ export default function Register({ navigation }: any) {
           timeInHouse: '',
           password: data.password,
         });
-        console.log('b')
-
-        console.log('returnApi',returnApi)
 
         const userId = returnApi.data._id;
 

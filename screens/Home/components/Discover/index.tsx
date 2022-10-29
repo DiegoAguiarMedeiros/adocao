@@ -3,24 +3,31 @@ import useColorScheme from '../../../../hooks/useColorScheme';
 import Colors from '../../../../constants/Colors';
 import Button from '../../../../components/Button';
 import { FontAwesome } from '@expo/vector-icons';
-import image from '../../../../assets/images/images';
-import { DiscoverInformation } from '../../../../state/types/discover-state-types';
-import { useState } from 'react';
+import noImage from '../../../../assets/images/no-image.png';
 
-export default function Discover(props: DiscoverInformation) {
+import { useEffect, useState } from 'react';
+
+export default function Discover(props: any) {
   const colorScheme = useColorScheme();
 
   const [position, setPosition] = useState(0);
+  const [pet, setPet] = useState(props);
 
   const getPosition = (newPosition: number) => {
-    if(position < 4 && position > 0){
+    const max = props.imgs.length;
+    if (position < max && position > 0) {
       return newPosition === 1 ? position + 1 : position - 1;
-    }else if(position === 0){
-      return newPosition === 1 ? position + 1 : 4;
-    }else {
+    } else if (position === 0) {
+      return newPosition === 1 ? position + 1 : max;
+    } else {
       return newPosition === 1 ? 0 : position - 1;
     }
   }
+
+  useEffect(() => {
+    setPet(props[0])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props]);
 
   const getImageSrc = (next: number) => {
     const newPosition = getPosition(next)
@@ -30,11 +37,11 @@ export default function Discover(props: DiscoverInformation) {
     <Styled.Container background={Colors[colorScheme].background}>
       <Styled.containerImgLeft onPress={() => getImageSrc(0)} />
       <Styled.containerImgRight onPress={() => getImageSrc(1)} />
-      <Styled.Img source={image[props.photos[position]]} />
+      <Styled.Img source={{ uri: props.imgs[position] }} />
       <Styled.ContainerProfile background={Colors[colorScheme].background} shadow={Colors[colorScheme].shadow}>
         <Styled.Name color={Colors[colorScheme].text}>{props.name}
         </Styled.Name>
-        <Styled.breed color={Colors[colorScheme].textSecondary}>{props.raca}
+        <Styled.breed color={Colors[colorScheme].textSecondary}>{props.breed}
         </Styled.breed>
       </Styled.ContainerProfile>
       <Styled.ContainerButtons background={Colors[colorScheme].background}>
@@ -43,7 +50,7 @@ export default function Discover(props: DiscoverInformation) {
             style={{ marginRight: 16 }}
             size="xxmediumCircle"
             colorShadow={Colors[colorScheme].buttonShadow}
-            onPress={() => props.rejectPerfil()}
+            onPress={() => console.log('X')}
             color={Colors[colorScheme].buttonColor}
           >
             {' '}
@@ -60,7 +67,7 @@ export default function Discover(props: DiscoverInformation) {
             style={{ marginRight: 16 }}
             size="xxmediumCircle"
             colorShadow={Colors[colorScheme].buttonShadow}
-            onPress={() => props.acceptPerfil()}
+            onPress={() => console.log('V')}
             color={Colors[colorScheme].buttonColor}
           >
             {' '}

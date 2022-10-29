@@ -31,11 +31,9 @@ export default function RegisterComplement({ navigation }: any) {
 
   const isAuthenticated = async () => {
     const authenticated = await Auth.isAuthenticated();
-    console.log('authenticated', authenticated)
     if (authenticated) {
 
       const getUserRegisterCompleted = await User.getUserRegisterCompleted();
-      console.log('getUserRegisterCompleted', getUserRegisterCompleted)
       if (getUserRegisterCompleted) {
         navigation.navigate('Root')
       } else {
@@ -88,19 +86,14 @@ export default function RegisterComplement({ navigation }: any) {
 
         setErrorSubmit("");
         const userId = await User.getUserId();
-        console.log('1', userId, {
-          house: optionState[0].active,
-          houseSize: optionState[1].active,
-          otherPets: optionState[2].active === 'Sim' ? true : false,
-          timeInHouse: optionState[3].active,
-        })
+
         const returnApi = await restUsers.putUsersComplement(userId, {
           house: optionState[0].active,
           houseSize: optionState[1].active,
           otherPets: optionState[2].active === 'Sim' ? true : false,
           timeInHouse: optionState[3].active,
         });
-        console.log('2', returnApi)
+        
 
 
         setData({
@@ -109,7 +102,7 @@ export default function RegisterComplement({ navigation }: any) {
           password: "",
           confirmpassword: "",
         });
-        console.log('3')
+
         navigation.navigate('Root')
       } else {
 
@@ -126,7 +119,6 @@ export default function RegisterComplement({ navigation }: any) {
 
       }
     } catch (error: any) {
-      console.log('error asd')
       console.log(error)
 
     }

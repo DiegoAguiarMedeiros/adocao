@@ -1,11 +1,14 @@
 export type DiscoverInformation = {
-  id: string,
+  __v: string,
+  _id: string,
   name: string,
-  raca: string,
-  photos: Array<string>,
-  rejects: boolean,
-  rejectPerfil: Function,
+  breed: string,
+  company: string,
+  size: string,
+  createdAt: string,
+  sociable: boolean,
+  imgs: Array<string>,
+  active: boolean,
   accepts: boolean,
-  acceptPerfil: Function,
 };
 

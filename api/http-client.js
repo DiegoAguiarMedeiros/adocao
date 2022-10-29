@@ -5,7 +5,6 @@ const HttpClient = axios.create({ baseURL: 'https://adocaoappbackend.herokuapp.c
 
 HttpClient.interceptors.request.use(async (config) => {
   const token = await User.getUserToken();
-  console.log('token',token)
   const newConfig = { ...config };
   if (token) {
     newConfig.headers.Authorization = `Bearer ${token}`;
