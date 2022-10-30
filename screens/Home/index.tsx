@@ -32,13 +32,13 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'Home'>)
 
   const rejectPerfil = async (id: string) => {
     const retorno = await restUser.userNotAcceptPet(id)
-      discoverData[0].rejects = true;
-      removerdataDogs();
+    discoverData[0].rejects = true;
+    removerdataDogs();
   }
   const acceptPerfil = async (id: string) => {
     const retorno = await restUser.userAcceptPet(id)
-      discoverData[0].accepts = true;
-      removerdataDogs();
+    discoverData[0].accepts = true;
+    removerdataDogs();
   }
 
 
@@ -50,7 +50,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'Home'>)
   }, []);
   const renderDiscover = () => {
     if (pet.length > 0) {
-      return <Discover {...pet[0]} rejectPerfil={rejectPerfil} acceptPerfil={acceptPerfil} />
+      return <Discover {...pet[0]} rejectPerfil={rejectPerfil} acceptPerfil={acceptPerfil} navigation={navigation} />
     } else {
       return <Styled.Container background={Colors[colorScheme].background}><Styled.ImgNoData source={noData} /></Styled.Container>
     }

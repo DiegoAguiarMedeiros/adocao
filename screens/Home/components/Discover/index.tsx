@@ -6,9 +6,10 @@ import { FontAwesome } from '@expo/vector-icons';
 import noImage from '../../../../assets/images/no-image.png';
 import Loading from '../../../../components/loading'
 import { useEffect, useState } from 'react';
+import navigation from '../../../../navigation';
 
 export default function Discover(props: any) {
-  const { acceptPerfil, rejectPerfil } = props;
+  const { acceptPerfil, rejectPerfil, navigation } = props;
   const colorScheme = useColorScheme();
   const [showLoading, setShowLoading] = useState(true);
   const [position, setPosition] = useState(0);
@@ -50,8 +51,14 @@ export default function Discover(props: any) {
       <Styled.containerImgRight onPress={() => getImageSrc(1)} />
       <Styled.Img source={{ uri: props.imgs[position] }} />
       <Styled.ContainerProfile background={Colors[colorScheme].background} shadow={Colors[colorScheme].shadow}>
-        <Styled.Name color={Colors[colorScheme].text}>{props.name}
-        </Styled.Name>
+        <Styled.NameTouchable onPress={() => navigation.navigate('Modal', {
+          pet: props,
+          acceptPerfil: acceptPerfil,
+          rejectPerfil: rejectPerfil,
+        })}>
+          <Styled.Name color={Colors[colorScheme].text}>{props.name}
+          </Styled.Name>
+        </Styled.NameTouchable>
         <Styled.breed color={Colors[colorScheme].textSecondary}>{props.breed}
         </Styled.breed>
       </Styled.ContainerProfile>
@@ -61,7 +68,7 @@ export default function Discover(props: any) {
             style={{ marginRight: 16 }}
             size="xxmediumCircle"
             colorShadow={Colors[colorScheme].buttonShadow}
-            onPress={() => acceptPerfil(props._id)}
+            onPress={() => rejectPerfil(props._id)}
             color={Colors[colorScheme].buttonColor}
           >
             {' '}
@@ -78,7 +85,7 @@ export default function Discover(props: any) {
             style={{ marginRight: 16 }}
             size="xxmediumCircle"
             colorShadow={Colors[colorScheme].buttonShadow}
-            onPress={() => rejectPerfil(props._id)}
+            onPress={() => acceptPerfil(props._id)}
             color={Colors[colorScheme].buttonColor}
           >
             {' '}
@@ -91,6 +98,6 @@ export default function Discover(props: any) {
           </Button>
         </Styled.Buttons>
       </Styled.ContainerButtons>
-    </Styled.Container>
+    </Styled.Container >
   );
 }
