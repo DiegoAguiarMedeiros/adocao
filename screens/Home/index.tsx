@@ -7,6 +7,7 @@ import noData from '../../assets/images/no-data.jpg';
 import useColorScheme from '../../hooks/useColorScheme';
 import Colors from '../../constants/Colors';
 import { useEffect, useState } from 'react';
+import restUser from "../../api/user/rest-user";
 import restPet from "../../api/pet/rest-pet";
 import discoverState from "./DiscoverState"
 
@@ -24,18 +25,20 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'Home'>)
   };
 
   const removerdataDogs = () => {
-    dataDogs.splice(0, 1);
-    const newDataDogs = [...dataDogs];
-    setDataDogs(newDataDogs);
+    pet.splice(0, 1);
+    const newDataDogs = [...pet];
+    setPet(newDataDogs);
   }
 
-  const rejectPerfil = () => {
-    discoverData[0].rejects = true;
-    removerdataDogs();
+  const rejectPerfil = async (id: string) => {
+    const retorno = await restUser.userNotAcceptPet(id)
+      discoverData[0].rejects = true;
+      removerdataDogs();
   }
-  const acceptPerfil = () => {
-    discoverData[0].accepts = true;
-    removerdataDogs();
+  const acceptPerfil = async (id: string) => {
+    const retorno = await restUser.userAcceptPet(id)
+      discoverData[0].accepts = true;
+      removerdataDogs();
   }
 
 
@@ -47,7 +50,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'Home'>)
   }, []);
   const renderDiscover = () => {
     if (pet.length > 0) {
-      return <Discover {...pet[0]} />
+      return <Discover {...pet[0]} rejectPerfil={rejectPerfil} acceptPerfil={acceptPerfil} />
     } else {
       return <Styled.Container background={Colors[colorScheme].background}><Styled.ImgNoData source={noData} /></Styled.Container>
     }
