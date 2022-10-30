@@ -24,11 +24,16 @@ export default function Login({ navigation }: any) {
     password: "",
   });
 
-
   const isAuthenticated = async () => {
     const authenticated = await Auth.isAuthenticated();
     if (authenticated) {
-      navigation.navigate('RegisterComplement')
+
+      const getUserRegisterCompleted = await User.getUserRegisterCompleted();
+      if (getUserRegisterCompleted) {
+        navigation.navigate('Root')
+      } else {
+        navigation.navigate('RegisterComplement')
+      }
     }
   }
 
@@ -76,7 +81,12 @@ export default function Login({ navigation }: any) {
           password: "",
         });
         setShowLoading(false)
-        navigation.navigate('RegisterComplement')
+        const getUserRegisterCompleted = await User.getUserRegisterCompleted();
+        if (getUserRegisterCompleted) {
+          navigation.navigate('Root')
+        } else {
+          navigation.navigate('RegisterComplement')
+        }
       } else {
         setShowLoading(false)
         setErrorSubmit("Verificar os campos");

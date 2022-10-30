@@ -2,31 +2,35 @@ import { StyleSheet, Image, Button } from 'react-native';
 import srcImage from '../../assets/images/foto-perfil-usuario.jpg';
 import { Text, View } from '../../components/Themed';
 import { RowButton } from '../RegisterComplement/ButtonsOptions/styles';
+import User from '../../utils/user'
+import { useEffect, useState } from 'react';
 
 export default function UserScreen() {
+  const [nome, setNome] = useState('Nome');
+  const [email, setEmail] = useState('E-mail');
+  const loadUser = async () => {
+    const userString: any = await User.getUser();
+    const user: any = JSON.parse(userString);
+    setNome(`${user.name}`);
+    setEmail(user.email);
+  }
+  useEffect(() => {
+    loadUser();
+  }, []);
   return (
     <View style={styles.container}>
-      <Text>Aqui vão aparecer as informações sobre o usuário:</Text>
       <Image
         style={styles.foto}
         source={srcImage}
       />
       <View style={styles.linha}>
         <Text style={styles.title}>Nome: </Text>
-        <Text style={styles.conteudo}>Seu Nome Completo Aqui</Text>
-      </View> 
+        <Text style={styles.conteudo}>{nome}</Text>
+      </View>
       <View style={styles.linha}>
         <Text style={styles.title}>E-mail: </Text>
-        <Text style={styles.conteudo}>usuario@servidor.com.br</Text>
+        <Text style={styles.conteudo}>{email}</Text>
       </View>
-      <View style={styles.linha}>
-        <Text style={styles.title}>Celular: </Text>
-        <Text style={styles.conteudo}>(xx) xxxxx-xxxx</Text>
-      </View>
-      <Button
-        title="Alterar senha"
-        onPress={() => alert('Quero alterar minha senha')}
-      />
     </View>
   );
 }
@@ -40,15 +44,16 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
+
   },
-  linha:{
+  linha: {
     flexDirection: 'row',
   },
   conteudo: {
     fontSize: 20,
   },
   separator: {
-    marginVertical: 30,
+    marginVertical: 10,
     height: 1,
     width: '80%',
   },
