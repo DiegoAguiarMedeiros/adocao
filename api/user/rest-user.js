@@ -22,10 +22,13 @@ const putUsersActive = (id, values) => {
   HttpClient.put(`users?userId=${id}`, { active: values });
 };
 const userAcceptPet = (petId) => {
-  return HttpClient.post(`/userAcceptPet`, { pet: petId });
+  return HttpClient.post(`userAcceptPet`, { pet: petId });
 };
 const userNotAcceptPet = (petId) => {
   return HttpClient.post(`userNotAcceptPet`, { pet: petId });
+};
+const getAllAcceptPets = () => {
+  return HttpClient.get(`getAllAcceptPets`);
 };
 export default {
   putRecoveryPassword,
@@ -36,5 +39,6 @@ export default {
   postUsers,
   getUser,
   userAcceptPet,
-  userNotAcceptPet
+  userNotAcceptPet,
+  getAllAcceptPets
 };

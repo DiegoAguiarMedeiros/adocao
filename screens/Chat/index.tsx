@@ -1,77 +1,93 @@
-import { ScrollView, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Text, View } from '../../components/Themed';
-
+import { ScrollView, StyleSheet, Linking, TextInput } from 'react-native';
+import useColorScheme from '../../hooks/useColorScheme';
+import Colors from '../../constants/Colors';
+import * as Styled from './styles';
+import restUser from "../../api/user/rest-user";
+import { useEffect, useState } from 'react';
+import Button from '../../components/Button';
 export default function ChatScreen() {
-  const [mensagem] = ''
-  return (
-    <View style={styles.container}>
-      <View style={styles.areaMensagens}>
-        <ScrollView>
-          <Text style={styles.mensagemOutroUsuario}>Aqui irão aparecer as mensagens de outros usuários para você...</Text>
-          <Text style={styles.suaMensagem}>Entendi!</Text>
-        </ScrollView>
-      </View>
+  const colorScheme = useColorScheme();
+  const [canFetchData, setCanFetchData] = useState(true);
+  const [pet, setPet] = useState([]);
+  const fetchPet = async () => {
+    const pets = await restUser.getAllAcceptPets()
+    setPet(pets.data.petts)
+    setCanFetchData(false);
+  };
 
-      <View style={styles.areaInterativa}>
-        <TextInput
-          placeholder='Escreva uma mensagem aqui...'
-          value={mensagem}
-          style={{width: '80%'}}
-        />
-        <TouchableOpacity
-          style={styles.botaoEnviar}
-          onPress={() => alert('A mensagem foi enviada com sucesso!')}
-        >
-          <Text>Enviar</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+  useEffect(() => {
+    if (canFetchData) {
+      fetchPet();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return (
+    <Styled.Container background={Colors[colorScheme].background}>
+
+
+      <ScrollView style={styles.scrollView}>
+        <Styled.ContainerInner background={Colors[colorScheme].background} qtd={pet.length}>
+          {pet && pet.map((p: any) => (
+            <Styled.ContainerList background={Colors[colorScheme].background}>
+              {console.log('p', p)}
+              <Styled.Name color={Colors[colorScheme].text}>{p.name} ({p.company.name})
+              </Styled.Name>
+              <Styled.breed color={Colors[colorScheme].textSecondary}>{p.breed}
+              </Styled.breed>
+              <Styled.Img source={{ uri: p.imgs[0] }} />
+              <Styled.ContainerButtons>
+                <Styled.RowButton>
+                  <Button
+                    textColor={Colors[colorScheme].buttonOptionColorTextActive}
+                    style={{ marginRight: 16 }}
+                    colorShadow={Colors[colorScheme].buttonShadow}
+                    onPress={() => Linking.openURL(`mailto:${p.company.email}`)}
+                    color={Colors[colorScheme].buttonOptionColorActive}
+                    textSize="mediumtxt"
+                    size='login'
+                  >
+                    Email
+                  </Button>
+                </Styled.RowButton>
+                <Styled.RowButton>
+                  <Button
+                    textColor={Colors[colorScheme].buttonOptionColorTextActive}
+                    style={{ marginRight: 16 }}
+                    colorShadow={Colors[colorScheme].buttonShadow}
+                    onPress={() =>
+                      Linking.canOpenURL(`whatsapp://send?text=oi`).then(supported => {
+                        if (supported) {
+                          return Linking.openURL(
+                            `whatsapp://send?phone=${p.company.tel}&text=Oi`
+                          );
+                        } else {
+                          return Linking.openURL(
+                            `https://api.whatsapp.com/send?phone=${p.company.tel}&text=Oi`
+                          );
+                        }
+                      })}
+                    color={Colors[colorScheme].buttonOptionColorActive}
+                    textSize="mediumtxt"
+                    size='login'
+                  >
+                    Wahts'App
+                  </Button>
+                </Styled.RowButton>
+              </Styled.ContainerButtons>
+            </Styled.ContainerList>
+
+          ))}
+        </Styled.ContainerInner >
+
+      </ScrollView>
+    </Styled.Container >
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    borderColor: 'green',
-    borderWidth: 1,
+
+  scrollView: {
     height: '100%',
-    width: '100%',
   },
-  areaMensagens: {
-    flexDirection: 'row',
-    borderColor: 'red',
-    borderWidth: 1,
-    height: '80%',
-    width: '100%',
-    margin: 5,
-  },
-  areaInterativa: {
-    borderColor: 'blue',
-    borderWidth: 1,
-    height: '10%',
-    width: '100%',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  botaoEnviar: {
-    height: 40,
-    width: 50,
-    borderColor: 'orange',
-    borderWidth: 1,
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
-  mensagemOutroUsuario: {
-    justifyContent: 'flex-start',
-  },
-  suaMensagem: {
-    justifyContent: 'flex-end',
-  },
+
 });
